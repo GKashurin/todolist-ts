@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "title": "Выучить реакт",
+    "completed": true
+  },
+  {
+    "id": 2,
+    "title": "Выучить тайпскрипт",
+    "completed": false
+  },
+  {
+    "id": 3,
+    "title": "Выучить метод строки parseInt",
+    "completed": true
+  },
+  {
+    "id": 4,
+    "title": "Научиться решать числа Фибоначчи",
+    "completed": false
+  }
+]

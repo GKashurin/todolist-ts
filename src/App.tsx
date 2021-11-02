@@ -1,27 +1,26 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import TodoList from "./components/TodoList";
 import Button from "./components/Button";
 import {RootState} from "./store/reducers";
 import './App.css';
-import {addTodo} from "./store/actions";
+import {addTodo, fetchTodos} from "./store/actions";
 import Input from "./components/Input";
 import Popup from "./components/popup/Popup";
 
 const App = () => {
 	const [title, setTitle] = useState<string>('');
 	const [visibleAddPopup, setVisibleAddPopup] = useState<boolean>(false)
-	const [changeContainer, setChangeContainer] = useState<boolean>(false); //меняет класс у popup__container. Отвечает за анимацию закрытия
 	const todos = useSelector(((state: RootState) => state.todoReducer.todos))
+	const isLoaded = useSelector(((state: RootState) => state.todoReducer.loading))
 	// const removedTodos = useSelector(((state: RootState) => state.todoReducer.removedTodos))
 	const dispatch = useDispatch();
 
+useEffect(() => {dispatch(fetchTodos())},[])
 
 	const cancelButtonClick = (): void => {
-		setChangeContainer(true);
 		setTimeout(() => {
 			setVisibleAddPopup(false)
-			setChangeContainer(false);
 		}, 599);
 	};
 
@@ -37,14 +36,12 @@ const App = () => {
 	}
 	return (
 		<div className="App">
-			<TodoList
-				setChangeContainer={setChangeContainer}
+			<TodoList isLoaded={isLoaded}
 				todos={todos}
-				changeContainer={changeContainer}
 			/>
 			<Button className="add" onClick={() => setVisibleAddPopup(true)}>Добавить задачу</Button>
 			{visibleAddPopup ?
-				<Popup changeContainer={changeContainer}>
+				<Popup >
 					<p>Добавить новую задачу</p>
 					<Input className="add-input"
 						   type="text"

@@ -8,14 +8,10 @@ import Input from "./Input";
 
 interface TodoItemProps {
 	todo: ITodo;
-	setVisibleDeletePopup: any;/////////;
-	changeContainer: boolean;
-	visibleDeletePopup: boolean;
-	cancelButtonClick: any;////////
-	setChangeContainer: any////////
 }
 
-const TodoItem: FC<TodoItemProps> = ({todo, cancelButtonClick, setChangeContainer, setVisibleDeletePopup, changeContainer, visibleDeletePopup}) => {
+const TodoItem: FC<TodoItemProps> = ({todo}) => {
+	const [visibleDeletePopup, setVisibleDeletePopup] = useState<boolean>(false)
 	const [title, setTitle] = useState<string>(todo.title)
 	const [completed, setCompleted] = useState<boolean>(todo.completed)
 	const [editable, setEditable] = useState<boolean>(false)
@@ -23,16 +19,10 @@ const TodoItem: FC<TodoItemProps> = ({todo, cancelButtonClick, setChangeContaine
 
 	const removeTodo = () => {
 		dispatch(deleteTodo(todo))
-		console.log(todo)
-		setChangeContainer(true);
-		setTimeout(() => {
-			setVisibleDeletePopup(false)
-			setChangeContainer(false);
-		}, 599);
+		setVisibleDeletePopup(false)
 	}
-
 	return (
-		<div className={"todoitem"}>
+		<div className="todoitem">
 			<div className="todoitem__col">
 				<div className={!completed ? "todoitem__title" : "todoitem__title completed"}>
 					{!editable ? todo.title :
@@ -68,14 +58,14 @@ const TodoItem: FC<TodoItemProps> = ({todo, cancelButtonClick, setChangeContaine
 				}}
 						className="update">{!editable ? "Редактировать задачу" : "Сохранить изменения"}
 				</Button>
+				{visibleDeletePopup ?
+					<Popup >
+						<p>Подтвердите удаление задачи</p>
+						<Button className={"delete"} onClick={removeTodo}>Удалить</Button>
+						<Button className={"update"} onClick={() => setVisibleDeletePopup(false)}>Отменить</Button>
+					</Popup>
+					: null}
 			</div>
-			{visibleDeletePopup ?
-				<Popup changeContainer={changeContainer}>
-					<p>Подтвердите удаление задачи</p>
-					<Button className={"delete"} onClick={removeTodo}>Удалить</Button>
-					<Button className={"update"} onClick={cancelButtonClick}>Отменить</Button>
-				</Popup>
-				: null}
 		</div>
 	);
 };

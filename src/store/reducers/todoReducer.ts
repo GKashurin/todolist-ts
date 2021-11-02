@@ -1,4 +1,4 @@
-import {ADD_TODO, DELETE_TODO, UPDATE_TODO} from "../actions";
+import {ADD_TODO, DELETE_TODO, SET_LOADED, SET_TODOS, UPDATE_TODO} from "../actions";
 
 interface TodoState {
 	todos: any[];
@@ -12,28 +12,7 @@ interface TodoAction {
 }
 
 const initialState: TodoState = {
-	todos: [
-		{
-			id: 1,
-			title: "Выучить реакт",
-			completed: true
-		},
-		{
-			id: 2,
-			title: "Выучить тайпскрипт",
-			completed: false
-		},
-		{
-			id: 3,
-			title: "Выучить метод строки parseInt",
-			completed: true
-		},
-		{
-			id: 4,
-			title: "Научиться решать числа Фибоначчи",
-			completed: false
-		},
-	],
+	todos: [],
 	// removedTodos: [],
 	loading: false
 }
@@ -41,6 +20,18 @@ const initialState: TodoState = {
 
 export const todoReducer = (state = initialState, action: TodoAction): TodoState => {
 	switch (action.type) {
+		case SET_TODOS:
+			return {
+				...state,
+				todos: action.payload,
+				loading: true,
+			};
+
+		case SET_LOADED:
+			return {
+				...state,
+				loading: action.payload,
+			};
 		case ADD_TODO:
 			return {
 				...state,
