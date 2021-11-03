@@ -1,11 +1,12 @@
 import React from "react";
+import "./Input.css"
 
 interface InputProps {
 	className: string;
 	type: string;
 	name?: string;
 	value?: string;
-	onChange: any;//////////
+	onChange: any;
 	placeholder?: string;
 	id?: string;
 	checked?: boolean

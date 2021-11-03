@@ -3,17 +3,15 @@ import {ADD_TODO, DELETE_TODO, SET_LOADED, SET_TODOS, UPDATE_TODO} from "../acti
 interface TodoState {
 	todos: any[];
 	loading: boolean;
-	// removedTodos: any[];
 }
 
 interface TodoAction {
 	type: string;
-	payload?: any//////////
+	payload?: any
 }
 
 const initialState: TodoState = {
 	todos: [],
-	// removedTodos: [],
 	loading: false
 }
 
@@ -43,9 +41,6 @@ export const todoReducer = (state = initialState, action: TodoAction): TodoState
 				todos: [...state.todos.filter(todo => {
 					return todo.id !== action.payload.id
 				})]
-				// removedTodos: [...state.removedTodos, ...state.todos.filter(todo => {
-				// 	return todo.id === action.payload
-				// })]
 			}
 		case UPDATE_TODO:
 			state.todos.map(todo => {

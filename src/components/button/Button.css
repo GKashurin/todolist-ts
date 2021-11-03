@@ -1,0 +1,23 @@
+.btn {
+    width: 150px;
+    padding: 5px;
+    color: cornsilk;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 5%;
+    border: none;
+}
+.add {
+    background: #28a5e8;
+    margin-bottom: 10px;
+}
+.delete {
+    background: #e82845;
+    margin-right: 10px;
+}
+.update {
+    background: teal;
+}
+.back {
+    background: #282828;
+}

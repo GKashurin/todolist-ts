@@ -1,0 +1,35 @@
+
+.todoitem {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.todoitem_hide {
+    transform: translateX(-200%);
+    transition: transform 0.5s;
+}
+
+.todoitem:last-child {
+    margin-bottom: 0;
+}
+
+.todoitem__col {
+    flex: 1 1 50%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.todoitem__title {
+    color: #282828;
+    font-size: 28px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+.todoitem__title > input {
+    margin: 0 10px 0 0;
+}
+
+.completed {
+    color: grey;
+    text-decoration: line-through;
+}
