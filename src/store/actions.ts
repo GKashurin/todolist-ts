@@ -15,7 +15,7 @@ export const setLoaded = (payload: boolean) => ({type: SET_LOADED, payload});
 export const fetchTodos = () => (dispatch: any) => {dispatch({type: SET_LOADED, payload: false});
 
 	axios
-		.get(`http://localhost:3000/todos.json`)
+		.get(`https://todolist-ts-hqwo6fwce-gkashurin.vercel.app/todos.json`)
 		.then((response: any) => dispatch(setTodos(response.data)))
 
 };
